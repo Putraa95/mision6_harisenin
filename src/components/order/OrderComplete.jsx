@@ -9,10 +9,10 @@ import navIcon from "../../assets/images/navigasi.png";
 import SearchBar from "../item/SearchBar";
 import DropdownButton from "../item/DropdownButton";
 import image1 from "../../assets/images/avatar/Avatar12.png";
-import Invoice2 from "./invoice/invoiceOrderComplete";
+import InvoiceOrderComplete from "./invoice/invoiceOrderComplete";
 import Footer from "../item/Footer";
 import Avatar1 from "../../assets/images/avatar/Avatar1.png";
-import Pagination from "../item/Pagination";
+import Pagination from "../../components/item/Pagination";
 
 const invoices = [
   {
@@ -57,9 +57,7 @@ function OrderComplete() {
     setSelectedItem(item);
     switch (item) {
       case "class":
-
-      case "complete":
-        navigate("/order/complete"); // Perbarui rute ke order/confirmation
+        navigate("/class");
         break;
 
       case "order3":
@@ -67,7 +65,7 @@ function OrderComplete() {
         break;
 
       case "profile":
-        navigate("/order/confirmation"); // Perbarui rute ke order/confirmation
+        navigate("/order/confirmation");
         break;
 
       default:
@@ -95,7 +93,7 @@ function OrderComplete() {
           <div className="bg-white shadow rounded-lg p-4">
             <ul className="space-y-2">
               <li
-                onClick={() => handleClick("profile")} // Perbarui nilai ke "profile"
+                onClick={() => handleClick("profile")}
                 className={`flex items-center p-2 cursor-pointer ${
                   selectedItem === "profile" ? "bg-orange-400 text-white" : ""
                 }`}
@@ -156,20 +154,29 @@ function OrderComplete() {
               ]}
             />
           </div>
-          {invoices.map((invoice, index) => (
-            <Invoice2
-              key={index}
-              status={invoice.status}
-              imageSrc={invoice.imageSrc}
-              judul={invoice.judul}
-              paragraf={invoice.paragraf}
-              AvatarSrc={invoice.AvatarSrc}
-              author={invoice.author}
-              position={invoice.position}
-              progressPercentage={invoice.progressPercentage}
-            />
-          ))}
-          <Pagination totalPages={totalPages} />
+          {/* Section 2: Invoice List */}
+          {invoices && invoices.length > 0 ? (
+            invoices.map((invoice, index) => (
+              <InvoiceOrderComplete
+                key={index}
+                status={invoice.status}
+                imageSrc={invoice.imageSrc}
+                judul={invoice.judul}
+                paragraf={invoice.paragraf}
+                AvatarSrc={invoice.AvatarSrc}
+                author={invoice.author}
+                position={invoice.position}
+                progressPercentage={invoice.progressPercentage}
+              />
+            ))
+          ) : (
+            <p>Tidak ada pesanan yang tersedia.</p>
+          )}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
         </section>
       </main>
 

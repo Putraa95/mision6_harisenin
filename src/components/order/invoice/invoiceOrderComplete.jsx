@@ -6,11 +6,11 @@ const Invoice = ({
   status,
   imageSrc,
   judul,
-
   paragraf,
   author,
   position,
   AvatarSrc,
+  progressPercentage,
 }) => {
   // Menentukan warna latar belakang berdasarkan status
   const statusColors = {
@@ -36,37 +36,39 @@ const Invoice = ({
       </div>
 
       {/* Detail */}
-      <div className="border p-4 rounded-lg flex">
-        <div className="flex items-start space-x-4">
-          <img
-            src={imageSrc}
-            alt="Invoice"
-            className="w-52 h-auto object-cover rounded-lg"
-          />
-          <div className="flex-1">
-            <p className="mb-2 font-semibold">{judul}</p>
-            <p className="text-gray-500 mb-4">{paragraf}</p>{" "}
-            {/* Jarak dengan avatar */}
-            {/* Biodata */}
-            <div className="flex items-center space-x-4 mb-4">
-              {" "}
-              {/* Jarak dengan ikon */}
-              <img src={AvatarSrc} alt="Avatar" />
-              <div>
-                <p className="font-bold">{author}</p>
-                <p className="text-gray-500">{position}</p>
-              </div>
+      <div className="border p-4 rounded-lg flex flex-col lg:flex-row">
+        {/* Image */}
+        <img
+          src={imageSrc}
+          alt="Invoice"
+          className="w-full lg:w-52 h-auto object-cover rounded-lg mb-4 lg:mb-0 lg:mr-4"
+        />
+
+        <div className="flex-1">
+          <p className="mb-2 font-semibold">{judul}</p>
+          <p className="text-gray-500 mb-4">{paragraf}</p>{" "}
+          {/* Jarak dengan avatar */}
+          {/* Biodata */}
+          <div className="flex items-center space-x-4 mb-4">
+            <img
+              src={AvatarSrc}
+              alt="Avatar"
+              className="w-12 h-12 rounded-full"
+            />
+            <div>
+              <p className="font-bold">{author}</p>
+              <p className="text-gray-500">{position}</p>
             </div>
-            {/* Ikon dan Deskripsi */}
-            <div className="flex space-x-8 items-center">
-              <div className="flex items-center space-x-2">
-                <FaBook className="text-gray-500" /> {/* Ikon modul */}
-                <p className="text-gray-500">modul</p>
-              </div>
-              <div className="flex items-center space-x-2">
-                <FaClock className="text-gray-500" /> {/* Ikon waktu */}
-                <p className="text-gray-500">360 menit</p>
-              </div>
+          </div>
+          {/* Ikon dan Deskripsi */}
+          <div className="flex space-x-8 items-center">
+            <div className="flex items-center space-x-2">
+              <FaBook className="text-gray-500" /> {/* Ikon modul */}
+              <p className="text-gray-500">modul</p>
+            </div>
+            <div className="flex items-center space-x-2">
+              <FaClock className="text-gray-500" /> {/* Ikon waktu */}
+              <p className="text-gray-500">360 menit</p>
             </div>
           </div>
         </div>
@@ -80,7 +82,7 @@ const Invoice = ({
           <div className="flex-1 max-w-2xl bg-gray-200 rounded-full h-1">
             <div
               className="bg-orange-500 h-full rounded-full"
-              style={{ width: "80%" }} // Sesuaikan dengan persentase yang diinginkan
+              style={{ width: `${progressPercentage}%` }} // Sesuaikan dengan persentase yang diinginkan
             ></div>
           </div>
         </div>
